@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   
-  get "/chatbox" , to: 'im#chat_box'
+  get "/chatbox" ,      to: 'im#chat_box'
   get "/chatboxgroup" , to: 'im#chat_box_group'
+  post "/create_group", to: 'im#create_group'
+  post "/quit_group",   to: 'im#quit_group'
+  post "/invite_other_members", to: 'im#invite_other_members'
   mount PlayAuth::Engine => '/auth', :as => :auth
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

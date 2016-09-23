@@ -31,8 +31,8 @@
       console.log message
     ,
     onTextMessage:(message)->
-      console.log "收到文本消息"
-      # console.log message
+      console.log "收到文本消息->"
+      console.log message
     ,
     onInviteMessage:(message)->
     ,

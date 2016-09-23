@@ -5,4 +5,5 @@
 //= require ./huanxingSDK/strophe.js
 //= require ./huanxingSDK/websdk-1.1.2.js
 //= require ./huanxingSDK/webim.config.js
+//= require ./huanxingSDK/websdk.shim.js
 //= require_tree ./im
