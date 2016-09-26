@@ -8,19 +8,14 @@ PlayAuth::User.class_eval  do |variable|
     # “授权注册”模式：注册环信账号时，必须携带管理员身份认证信息。推荐使用“授权注册”，这样可以防止某些已经获取了注册 URL 和知晓注册流程的人恶意向服务器大量注册垃圾用户。
     admin_token = ImConfigure.get_admin_token
     command = %~
-    curl -X POST -H "Authorization: Bearer #{admin_token}" -i "https://a1.easemob.com/blackdust/huanxin123/users" -d '{"username":"#{self.id}","password":"123456"}'
+    curl -X POST -H "Authorization: Bearer #{admin_token}" -i "https://a1.easemob.com/#{ENV["HUAN_XIN_USER_NAME"]}/#{ENV["HUAN_XIN_APP_NAME"]}/users" -d '{"username":"#{self.id}","password":"123456"}'
     ~
     
     str       = `#{command}`
     regex     =  /{.*}/m
     match_str =  regex.match(str)
-    puts "@@@@@@@@@@@@@@@@@@创建子账号"
-    puts  match_str
-    puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@"
     # match_str 转json后没有 error的key 算是创建成功 
-    # JSON.parse(match_str[0])["entities"][0]["username"]  
 
-    "-> 可以修改昵称(创建昵称)"
     ImConfigure.make_set_nickname(self.id, self.name)
   end
 

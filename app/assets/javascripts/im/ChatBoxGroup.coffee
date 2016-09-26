@@ -11,11 +11,10 @@
     @conn = new WebIM.connection initialize_hash
 
     # 登录
-    console.log @props.data.current_user.id
     login_hash = apiUrl: WebIM.config.apiURL
     , user: @props.data.current_user.id
     , pwd: "123456"
-    , appKey: "blackdust#huanxin123"
+    , appKey: @props.data.app_key
     @conn.open(login_hash)
 
 
