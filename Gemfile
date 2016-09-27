@@ -45,7 +45,7 @@ group :development do
   gem 'spring'
 end
 gem 'haml'
-gem 'mongoid'
+gem 'mongoid', '5.1.4'
 gem 'play_auth', :github => 'mindpin/play_auth',
                  :tag => "0.0.1"
 
