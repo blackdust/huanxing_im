@@ -11,7 +11,7 @@ class ImController < ApplicationController
       messages: [],
       current_user: {id:current_user.id.to_s, name: current_user.name},
       users:ary,
-      app_key:ENV["RONG_LIAN_YUN_APP_ID"]
+      app_key:ENV['HUAN_XIN_APP_KEY']
     }
 
   end
@@ -25,7 +25,7 @@ class ImController < ApplicationController
       current_user: {id:current_user.id.to_s, name: current_user.name},
       users: ary,
       groups: groups,
-      app_key:ENV["RONG_LIAN_YUN_APP_ID"]
+      app_key:ENV['HUAN_XIN_APP_KEY']
     }
   end
 
@@ -40,7 +40,7 @@ class ImController < ApplicationController
     request_body["members"] = params[:members]
 
     command = %~
-    curl -X POST 'https://a1.easemob.com/#{ENV["HUAN_XIN_USER_NAME"]}/#{ENV["HUAN_XIN_APP_NAME"]}/chatgroups' -H 'Authorization: Bearer #{ImConfigure.get_admin_token}' -d '#{JSON.generate(request_body)}'
+    curl -X POST 'https://a1.easemob.com/#{ENV['HUAN_XIN_USER_NAME']}/#{ENV['HUAN_XIN_APP_NAME']}/chatgroups' -H 'Authorization: Bearer #{ImConfigure.get_admin_token}' -d '#{JSON.generate(request_body)}'
     ~
     json = JSON.parse(`#{command}`)
     if json["error"].nil?
@@ -52,7 +52,7 @@ class ImController < ApplicationController
 
   def quit_group
     command = %~
-    curl -X DELETE 'https://a1.easemob.com/#{ENV["HUAN_XIN_USER_NAME"]}/#{ENV["HUAN_XIN_APP_NAME"]}/chatgroups/#{params[:group_id]}/users/#{current_user.id}' -H 'Authorization: Bearer #{ImConfigure.get_admin_token}-Ls'
+    curl -X DELETE 'https://a1.easemob.com/#{ENV['HUAN_XIN_USER_NAME']}/#{ENV['HUAN_XIN_APP_NAME']}/chatgroups/#{params[:group_id]}/users/#{current_user.id}' -H 'Authorization: Bearer #{ImConfigure.get_admin_token}-Ls'
     ~
     json = JSON.parse(`#{command}`)
     if json["error"].nil?
@@ -63,6 +63,7 @@ class ImController < ApplicationController
     end
   end
 
+  # 创建者不能退出小组 只有删除或者移交权利
   # def delete_group
   #   command = %~
   #   curl -X GET 'https://a1.easemob.com/blackdust/huanxin123/users/#{current_user.id}/joined_chatgroups' -H 'Authorization: Bearer  #{ImConfigure.get_admin_token}'
@@ -71,7 +72,7 @@ class ImController < ApplicationController
 
   def invite_other_members
     command = %~
-    curl -X  POST -H 'Authorization: Bearer #{ImConfigure.get_admin_token}' -i  'https://a1.easemob.com/#{ENV["HUAN_XIN_USER_NAME"]}/#{ENV["HUAN_XIN_APP_NAME"]}/chatgroups/#{params[:group_id]}/users' -d '{"usernames":#{params[:members]}}'
+    curl -X  POST -H 'Authorization: Bearer #{ImConfigure.get_admin_token}' -i  'https://a1.easemob.com/#{ENV['HUAN_XIN_USER_NAME']}/#{ENV['HUAN_XIN_APP_NAME']}/chatgroups/#{params[:group_id]}/users' -d '{"usernames":#{params[:members]}}'
     ~
 
     str       = `#{command}`
@@ -89,7 +90,7 @@ class ImController < ApplicationController
 
   def get_user_groups
     command = %~
-    curl -X GET 'https://a1.easemob.com/#{ENV["HUAN_XIN_USER_NAME"]}/#{ENV["HUAN_XIN_APP_NAME"]}/users/#{current_user.id}/joined_chatgroups' -H 'Authorization: Bearer  #{ImConfigure.get_admin_token}'
+    curl -X GET 'https://a1.easemob.com/#{ENV['HUAN_XIN_USER_NAME']}/#{ENV['HUAN_XIN_APP_NAME']}/users/#{current_user.id}/joined_chatgroups' -H 'Authorization: Bearer  #{ImConfigure.get_admin_token}'
     ~
     JSON.parse(`#{command}`)["data"]
   end

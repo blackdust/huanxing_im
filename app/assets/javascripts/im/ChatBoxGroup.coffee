@@ -11,6 +11,7 @@
     @conn = new WebIM.connection initialize_hash
 
     # 登录
+    
     login_hash = apiUrl: WebIM.config.apiURL
     , user: @props.data.current_user.id
     , pwd: "123456"
