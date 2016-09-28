@@ -219,7 +219,7 @@ DEPENDENCIES
   jquery-rails
   mina (= 0.3.7)
   mina_util!
-  mongoid
+  mongoid (= 5.1.4)
   play_auth!
   rails (= 4.2.6)
   react-rails (= 1.8.0)
